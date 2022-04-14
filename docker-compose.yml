@@ -1,0 +1,24 @@
+version: '3'
+services:
+    familyapp:
+      build: ./familyapp
+      ports:
+      - "8090:8090"
+      depends_on:
+      - database
+    familymemberapp:
+      build: ./familymemberapp
+      ports:
+      - "8091:8091"
+      depends_on:
+      - familyApp
+    database:
+      container_name: "database"
+      image: mysql
+      environment:
+        MYSQL_ROOT_PASSWORD:
+        MYSQL_USER: kodilla_user
+        MYSQL_PASSWORD:
+      ports:
+      - "3306:3306"
+      restart: always
